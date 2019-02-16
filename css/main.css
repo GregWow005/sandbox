@@ -1,0 +1,89 @@
+.symbols {
+	font-size: 5rem;
+} 
+.symbol_spades {
+	color: #FF6700;
+}
+.symbol_clover {
+	color: #EA2020;
+}
+.symbol_heart {
+	color: #BF0000;
+}
+.symbol_diamont {
+	color: #BF62D6;
+}
+.symbol_crown {
+	color: #2086C1;
+}
+.symbol_dollar {
+	color: #85bb65;
+}
+.historic{
+	width: 500px;
+	float: left;
+	margin-left: 1rem;
+	height: 300px;
+	border: 1px solid #ccc;
+	overflow-y: scroll;
+}
+.article-slot {
+	width: 500px;
+	float: left;
+}
+.wrapper-slot-visor{
+	overflow: hidden;
+	width: 500px;
+	height: 300px;
+	position: relative;
+	border: 1px solid #ccc;
+}
+.slot-visor {
+	width: 500px;
+	height: 300px;
+	position: relative;
+}
+.col {
+	height: 500px;
+	width: 100px;
+	position: absolute;
+	outline: 1px solid lavender;
+	float: left;
+	top: -100px;
+}
+.col-1 {
+	left: 0;
+}
+.col-2 {
+	left: 100px;
+}
+.col-3 {
+	left: 200px;
+}
+.col-4 {
+	left: 300px;
+}
+.col-5 {
+	left: 400px;
+}
+.item {
+	width: 100%;
+    height: 100px;
+    float: left;
+    outline: 1px dashed #333;
+    text-align: center;
+    line-height: 100px;
+    font-size: 3rem;
+}
+
+.wrapper-actions {
+	text-align: right;
+	padding: 1rem 0;
+}
+.float-left {
+	float: left;
+}
+h4 {
+	color: crimson;
+	text-align: center;
+}
