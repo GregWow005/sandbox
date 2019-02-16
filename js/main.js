@@ -6,7 +6,7 @@ var SLOT = (function(){
 		style : "symbol_spades", 
 		code : "&#9824;"
 	}, 
-	/* {
+	{
 		style : "symbol_clover",
 		code : "&#9827;"
 	},
@@ -21,21 +21,6 @@ var SLOT = (function(){
 	{
 		style : "symbol_crown",
 		code : "&#9813;"
-	}, */
-	{
-		style : "symbol_crown",
-		code : "&#9813;"
-	},
-	{
-		style : "symbol_crown",
-		code : "&#9813;"
-	},
-	{
-		style : "symbol_crown",
-		code : "&#9813;"
-	},{
-		style : "symbol_dollar",
-		code : "&#36;"
 	},
 	{
 		style : "symbol_dollar",
