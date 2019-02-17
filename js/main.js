@@ -366,6 +366,6 @@ $(function(){
 		window['historic'] = '';
 		// remove DOM historic
 		var target_historic = $('.js-historic');
-		target_historic.hteml("");
+		target_historic.html("");
 	});
 });
