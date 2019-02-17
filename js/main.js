@@ -26,6 +26,7 @@ var SLOT = (function(){
 		style : "symbol_dollar",
 		code : "&#36;"
 	}];
+
 	// Show items - five items for array
 	var rollers = [
 		[],
@@ -34,14 +35,8 @@ var SLOT = (function(){
 		[],
 		[],
 	];
-	var _forwardPosition = function(){
-		//console.log('_forwardPosition');
-		$.each( rollers, function( i, roller ){
-			$.each( roller, function( j, item ){
-			});
-		});
-		
-	};
+
+	// Remove last item from roller
 	var _removeLastItem = function(){
 		// array.pop()
 		//console.log('_removeItem');
@@ -55,6 +50,7 @@ var SLOT = (function(){
 		}); */
 		_animateSlot();
 	};
+	// Add new item to roller
 	var _addFirstItem = function(){
 		//a.unshift()
 		//console.log('_addItem');
@@ -67,10 +63,13 @@ var SLOT = (function(){
 		
 		_removeLastItem();
 	};
+	// Repeat _initSlot to set new data
 	var _animateSlot = function(){
+		// Delete itens from roller in DOM
 		$( ".col" ).each(function( index ,item ) {
 			$(item).find('.item').remove();
 		});
+		// init slot with new data
 		_initSlot();
 		/* var items_slot = $('.js-item');
 		items_slot.animate({
@@ -79,17 +78,18 @@ var SLOT = (function(){
 			_removeLastItem();
 		}); */
 	};
+	// loop for control move slot
 	var _loop = function(){
 		//console.log('_loop');
-		//_forwardPosition();
 		_addFirstItem();
 
 	};
+	// create new symbok from array symbols
 	var _randomFigure = function(){
 		var random_number = Math.floor(Math.random() * 6);
 		return symbols[random_number];
 	};
-	
+	// set data before init game
 	var _setData = function(){
 		$.each( rollers, function( i, roller ){
 			//Only five elements for roller
@@ -101,6 +101,7 @@ var SLOT = (function(){
 		// Pintarlas en dom - cinco columnas con cinco elementos cada una
 		_initSlot();
 	};
+	// Create elements in DOM
 	var _initSlot = function(){
 		//console.log('_initSlot');
 		var slot = $('.js-visor-slot');
@@ -126,12 +127,10 @@ var SLOT = (function(){
 	};
 	var init = function(){
 		//console.log('_init');
-		// Hidratar las matrices
 		_setData();
 		
 	};
 	
-
 	// Functions Extenal button
 	var startSlot = function (){
 		clear_interval = window.setInterval(_loop,200);
@@ -143,6 +142,7 @@ var SLOT = (function(){
 		_checkPlay();
 	};
 	
+	// Check play result
 	var _checkPlay = function(){
 		var result_game = [];
 		var last_code , actual_code;
@@ -152,7 +152,7 @@ var SLOT = (function(){
 			// save intermedian element(index 2) in roller array
 			result_game.push(roller[2]);
 		});
-		console.log('result_game',result_game);
+		//console.log('result_game',result_game);
 		$.each( result_game, function( j, item ){
 			if(last_code === item.code){
 				counter = counter + 1;
@@ -166,10 +166,11 @@ var SLOT = (function(){
 			last_code = item.code;
 		});
 		
-		console.log('WINNER: ',code_winner,counter_winner);
+		//console.log('WINNER: ',code_winner,counter_winner);
 		_savePlay(result_game,code_winner,counter_winner);
 	};
 
+	// Save play for historic game
 	var _savePlay = function(game,code_winner,counter_winner){
 		var result = [{
 			date : _getDate(code_winner,counter_winner),
@@ -182,7 +183,7 @@ var SLOT = (function(){
 		var prize_title = $('.js-show-prize-title');
 		$('.js-prize').text(result_prize);
 		if(result_prize > 0 ){
-			prize_title.text('Enhorabuena!! Acaba de ganar:'+  result_prize);
+			prize_title.text('Enhorabuena!! Acaba de ganar:'+  result_prize + " €");
 		} else {
 			prize_title.text('');
 		}
@@ -191,19 +192,22 @@ var SLOT = (function(){
 		historic.push(result);
 		LocalStorageDataApi.setDataLocalStorage('historic',historic);
 	};
+	// get historic plays
 	var getHistoric = function(){
 		var historic = LocalStorageDataApi.getDataLocalStorage('historic');
-		console.log('historic ',historic);
+		//console.log('historic ',historic);
 		var template = "<div>";
 		var target_historic = $('.js-historic');
 		$.each( historic, function( i, element ){
 			$.each( element, function( j, item ){
-				template = template + "<h6> Date: " + item.date + "</h6>";
-				template = template + "<h6>Prize: " + item.prize + "</h6>";
-				console.log('MSG',item.date);
+				template = template + "<h6 class='date-text'> Date: " + item.date + "</h6>";
+				var item_style = " highlight-text ";
+				if(parseInt(item.prize) > 0){
+					item_style = " highlight-text-winner ";
+				}
+				template = template + "<h6 class='" + item_style + "'>Prize: " + item.prize + " €</h6>";
 				$.each( item.data, function( k, data ){
-					console.log('MSG',data.code);
-					template = template + "<span class='" + data.code  + "'>" + data.code + "</span>";
+					template = template + "<span class='little-item " + data.style  + "'>" + data.code + "</span>";
 				});
 
 			});
@@ -211,9 +215,11 @@ var SLOT = (function(){
 		template = template + "</div>";
 		target_historic.html(template);
 	};
+	// Get elementary date
 	var _getDate = function(){  
 		return new Date().toLocaleString();
 	};
+
 	var _getPrizes = function(code_winner,counter_winner){
 		console.log('typeof', typeof code_winner ,typeof counter_winner);
 		if(typeof code_winner === 'undefined' || typeof counter_winner === 'undefined'){
@@ -257,7 +263,7 @@ var SLOT = (function(){
 			}
 		}
 	};
-	//Optimizar esta parte
+	//Optimizar esta parte de los premios
 	var _getPrizesLow = function(counter_winner){
 		var prize;
 		switch (counter_winner) {
@@ -314,6 +320,7 @@ var SLOT = (function(){
 	};
 }());
 
+// Data store
 var LocalStorageDataApi = (function(){
 
     var getDataLocalStorage = function(item){
@@ -333,6 +340,7 @@ var LocalStorageDataApi = (function(){
 
 $(function(){ 
 	SLOT.init();
+	// Event for button actions in slot
 	$('.js-wrapper-actions').on('click','.js-button',function(e){
 		var this_button = $( event.target );
 		var state = this_button.data('state');
@@ -347,18 +355,17 @@ $(function(){
 		this_button.text(text_state);
 		this_button.data('state',text_state);
 	});
-
+	// Evento for get historic
 	$('.js-wrapper-actions').on('click','.js-get-historic',function(e){
 		var this_button = $( event.target );
 		SLOT.getHistoric();
 	});
-
+	// Evento for remove historic from localStorage and DOM
 	$('.js-wrapper-actions').on('click','.js-remove-historic',function(e){
 		localStorage.removeItem('historic');
 		window['historic'] = '';
+		// remove DOM historic
+		var target_historic = $('.js-historic');
+		target_historic.hteml("");
 	});
-
-	
-
-	
 });

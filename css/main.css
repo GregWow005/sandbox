@@ -19,13 +19,36 @@
 .symbol_dollar {
 	color: #85bb65;
 }
-.historic{
+.little-item  {
+	padding: .5rem;
+	font-size: 1.5rem;
+}
+.highlight-text {
+	color: #333;
+	font-size: 1.1rem;
+	margin: .5rem 0;
+}
+.highlight-text-winner {
+	color: crimson;
+	font-size: 1.25rem;
+	margin: .5rem 0;
+}
+.date-text {
+	color: #333;
+	font-size: 1.1rem;
+}
+.wrapper-historic {
 	width: 500px;
 	float: left;
 	margin-left: 1rem;
-	height: 300px;
 	border: 1px solid #ccc;
-	overflow-y: scroll;
+}
+.wrapper-historic h3 {
+	text-align: center;
+}
+.historic{
+	height: 200px;
+	overflow-y: auto;
 }
 .article-slot {
 	width: 500px;
@@ -86,4 +109,10 @@
 h4 {
 	color: crimson;
 	text-align: center;
+}
+.prize-title {
+	float: left;
+    font-size: 1.2rem;
+    color: crimson;
+    font-weight: 600;
 }
